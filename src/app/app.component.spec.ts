@@ -78,4 +78,34 @@ describe('AppComponent', () => {
     
     expect(totalDays).toEqual(days.length);
   }));
+  
+  it('should have weekdays', async(() => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+    const app = fixture.debugElement.componentInstance;
+    let totalDays = 0;
+    let days = compiled.querySelectorAll('.weekday');
+    expect(days).toBeTruthy();
+  }));
+  
+  it('should have weekends', async(() => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+    const app = fixture.debugElement.componentInstance;
+    let totalDays = 0;
+    let days = compiled.querySelectorAll('.weekend');
+    expect(days).toBeTruthy();
+  }));
+  
+  it('should have invalid dates', async(() => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+    const app = fixture.debugElement.componentInstance;
+    let totalDays = 0;
+    let days = compiled.querySelectorAll('.invalid');
+    expect(days).toBeTruthy();
+  }));
 });
