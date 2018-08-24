@@ -1,7 +1,7 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="container">
   <h1>
-    Welcome to {{ title }}!
+    Number 8 {{ title }}
   </h1>
   <label for="startDate">Start Date</label>
   <input type="date" name="startDate" id="start-date" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" [ngModel]="calendar.startDate | date:'yyyy-MM-dd'" (ngModelChange)="calendar.startDate = $event; calendar.setMonths()"/>
@@ -22,7 +22,7 @@
       </thead>
       <tbody>
         <tr class="week-row" *ngFor="let week of month.weeks">
-          <td class="day" *ngFor="let day of week" >{{day.getDate()}}</td>
+          <td class="day" [class.invalid]="calendar.isInvalid(day, month.weeks[0][6])" [class.weekday]="calendar.isWeekday(day, month.weeks[0][6])" [class.weekend]="calendar.isWeekend(day, month.weeks[0][6])" *ngFor="let day of week" ><span>{{day.getDate()}}</span></td>
         </tr>
       </tbody>
     </table>

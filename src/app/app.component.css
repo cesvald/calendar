@@ -2,6 +2,11 @@
     text-align: center;    
 }
 
+input {
+    font-size: 14px;
+    width: 135px;
+}
+
 .month-wrapper {
     display: inline-block;
     margin: 20px;
@@ -11,16 +16,20 @@
 }
 
 .month-title {
-    font-size: 16px;    
+    font-size: 17px;
+    margin-bottom: 0px;
 }
 
 label {
-    margin-left: 15px;
+    margin-left: 20px;
     margin-right: 10px;
+    font-weight: bold;
 }
 
 thead th {
     font-weight: bold;
+    background-color: #efe9e9;
+    padding: 5px;
 }
 
 td {
@@ -30,10 +39,25 @@ td {
     padding: 5px;
 }
 
+.invalid {
+    background-color: #c7c4c4;    
+}
+
+.invalid span {
+    visibility: hidden;
+}
+
+.weekday {
+    background-color: #7dc37d;
+}
+
+.weekend {
+    background-color: #f1f173;
+}
+
 h4 {
     margin-top: 0px;
     margin-bottom: 10px;
     padding: 5px;
     background-color: #cca6a6;
-    
 }

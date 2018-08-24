@@ -10,5 +10,5 @@ import { Calendar } from '../models/calendar';
 export class AppComponent {
   calendar: Calendar = new Calendar(new Date(2018, 7, 23), 30, '');
   
-  title: String = 'calendar';
+  title: String = 'Calendar';
 }

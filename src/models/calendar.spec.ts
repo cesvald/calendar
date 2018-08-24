@@ -49,13 +49,13 @@ describe('Calendar Class', () => {
     });
     
     it('should identify a date as invalid', () => {
-       expect(calendar.isInvalid(new Date(2018, 7, 19))).toBeTruthy();
-       expect(calendar.isInvalid(new Date(2018, 7, 25))).toBeFalsy();
-       expect(calendar.isInvalid(new Date(2018, 8, 24))).toBeTruthy();
+       expect(calendar.isInvalid(new Date(2018, 7, 19), new Date(2018, 7, 20))).toBeTruthy();
+       expect(calendar.isInvalid(new Date(2018, 7, 25), new Date(2018, 7, 20))).toBeFalsy();
+       expect(calendar.isInvalid(new Date(2018, 8, 24), new Date(2018, 7, 20))).toBeTruthy();
     });
     
     it('should identify a date as weekday', () => {
-        expect(calendar.isWeekday(new Date(2018, 7, 23))).toBeTruthy();
-        expect(calendar.isWeekday(new Date(2018, 7, 25))).toBeFalsy();
+        expect(calendar.isWeekday(new Date(2018, 7, 23), new Date(2018, 7, 20))).toBeTruthy();
+        expect(calendar.isWeekday(new Date(2018, 7, 25), new Date(2018, 7, 20))).toBeFalsy();
     });
 }); 

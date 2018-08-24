@@ -19,13 +19,12 @@ export class Calendar {
         this.startDate = new Date(this.startDate);
         this.endDate = new Date(this.startDate.getTime());
         this.endDate.setDate(this.endDate.getDate() + this.numDays);
-        this.endDate = this.endOfWeek(this.endDate);
         this.months = [];
         let month = new Month(); 
         let renderDate: Date = this.startOfWeek(this.startDate);
         let prevDate: Date = null;
         let week: Date[] = []
-        while(renderDate <= this.endDate){
+        while(renderDate < this.endDate){
             let currentDate = new Date(renderDate.getTime());
             if(prevDate != null && currentDate.getMonth() != prevDate.getMonth()){
                 let postWeekDates = this.datesEndOfWeek(prevDate);
@@ -48,8 +47,13 @@ export class Calendar {
             prevDate = new Date(renderDate.getTime());
             renderDate.setDate(renderDate.getDate() + 1);
         }
+        let lastDate = new Date(week[week.length - 1].getTime());
+        let remindingDates = this.datesEndOfWeek(lastDate);
+        week = week.concat(remindingDates);
         month.weeks.push(week);
         this.months.push(month);
+        
+        console.log(this.endDate)
         console.log(this.months)
     }
     
@@ -86,13 +90,17 @@ export class Calendar {
         return dates;
     }
     
-    isInvalid(date) {
+    isInvalid(date, dateOfMonth) {
         let afterDays = new Date(this.startDate.getTime());
-        afterDays.setDate(afterDays.getDate() + this.numDays);
-        return date < this.startDate || date > afterDays || (date.getDate() == 1 && date.getDay() > 0);
+        afterDays.setDate(afterDays.getDate() + this.numDays - 1);
+        return date < this.startDate || date > afterDays || date.getMonth() != dateOfMonth.getMonth();
     }
     
-    isWeekday(date) {
-        return date.getDay() != 0 && date.getDay() != 6;
+    isWeekday(date, dateOfMonth) {
+        return !this.isInvalid(date, dateOfMonth) && date.getDay() != 0 && date.getDay() != 6;
+    }
+    
+    isWeekend(date, dateOfMonth) {
+        return !this.isInvalid(date, dateOfMonth) && (date.getDay() == 0 || date.getDay() == 6);
     }
 }
