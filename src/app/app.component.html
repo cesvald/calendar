@@ -6,12 +6,17 @@
   <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
 </div>
 <label for="startDate">Start Date</label>
-<input type="date" name="startDate" id="start-date" [ngModel]="calendar.startDate | date:'yyyy-MM-dd'" (ngModelChange)="calendar.startDate = $event"/>
+<input type="date" name="startDate" id="start-date" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" [ngModel]="calendar.startDate | date:'yyyy-MM-dd'" (ngModelChange)="calendar.startDate = $event; calendar.setMonths()"/>
 <label for="startDate">Num of Days</label>
-<input type="number" name="numDays" id="num-days" ([ngModel])="calendar.numDays"/>
+<input type="number" name="numDays" id="num-days" [ngModel]="calendar.numDays" (ngModelChange)="calendar.numDays = $event; calendar.setMonths()"/>
 <label for="startDate">Country Code</label>
-<input type="text" name="countryCode" id="country-code" ([ngModel])="calendar.countryCode"/>
+<input type="text" name="countryCode" id="country-code" [(ngModel)]="calendar.countryCode"/>
 
 <div class="month-wrapper" *ngFor="let month of calendar.months">
-  <h4 class="month-title">{{month.weeks[0][0] | date:'MMMM yyyy'}}</h4>
+  <h4 class="month-title">{{month.weeks[0][6] | date:'MMMM yyyy'}}</h4>
+  <table>
+    <tr class="week-row" *ngFor="let week of month.weeks">
+      <td class="day" *ngFor="let day of week" >{{day.getDate()}}</td>
+    </tr>
+  </table>
 </div>

@@ -37,14 +37,15 @@ describe('Calendar Class', () => {
         expect(calendar.months.length).toEqual(2);
     });
     
-    it('should have 2 weeks the first month and 3 weeks tehe second month with 7 days each one', () => {
+    it('should have 2 weeks the first month and 4 weeks the second month with 7 days each one', () => {
         expect(calendar.months[0].weeks.length).toEqual(2);
         expect(calendar.months[0].weeks[0].length).toEqual(7);
         expect(calendar.months[0].weeks[1].length).toEqual(7);
-        expect(calendar.months[1].weeks.length).toEqual(3);
+        expect(calendar.months[1].weeks.length).toEqual(4);
         expect(calendar.months[1].weeks[0].length).toEqual(7);
         expect(calendar.months[1].weeks[1].length).toEqual(7);
         expect(calendar.months[1].weeks[2].length).toEqual(7);
+        expect(calendar.months[1].weeks[3].length).toEqual(7);
     });
     
     it('should identify a date as invalid', () => {

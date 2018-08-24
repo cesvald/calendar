@@ -12,11 +12,15 @@ export class Calendar {
         this.startDate = startDate;
         this.numDays = numDays;
         this.countryCode = countryCode;
+        this.setMonths();
+    }
+    
+    setMonths() {
+        this.startDate = new Date(this.startDate);
         this.endDate = new Date(this.startDate.getTime());
-        this.endDate.setDate(this.endDate.getDate() + numDays);
+        this.endDate.setDate(this.endDate.getDate() + this.numDays);
         this.endDate = this.endOfWeek(this.endDate);
         this.months = [];
-        
         let month = new Month(); 
         let renderDate: Date = this.startOfWeek(this.startDate);
         let prevDate: Date = null;
@@ -44,7 +48,9 @@ export class Calendar {
             prevDate = new Date(renderDate.getTime());
             renderDate.setDate(renderDate.getDate() + 1);
         }
+        month.weeks.push(week);
         this.months.push(month);
+        console.log(this.months)
     }
     
     startOfWeek(date) {
@@ -56,10 +62,9 @@ export class Calendar {
     datesStartOfWeek(date) {
         let startDate = this.startOfWeek(date);
         let dates = [];
-        date.setDate(date.getDate() - 1);
-        while(date >= startDate){
-            dates.push(new Date(date.getTime()));
-            date.setDate(date.getDate() - 1);
+        while(startDate < date){
+            dates.push(new Date(startDate.getTime()));
+            startDate.setDate(startDate.getDate() + 1);
         }
         return dates;
     }

@@ -78,7 +78,7 @@ describe('AppComponent', () => {
     expect(months.length).toEqual(app.calendar.months.length);
   }));
   
-  fit('should have all days rendered', async(() => {
+  it('should have all days rendered', async(() => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
