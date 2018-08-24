@@ -11,17 +11,27 @@ fdescribe('Calendar Class', () => {
         calendar = null;
     });
     
-    it('should set the initial render date on the closest Sunday', () => {
+    it('should set the initial render date on the closest Sunday: 19 of August', () => {
        expect(calendar.renderDate.getDay()).toEqual(0);
     });
     
-    it('should set the specific date on Sunday', () => {
-       expect(calendar.startOfWeek(new Date(2018, 7, 25)).getDay()).toEqual(0);
+    it('should set the specific date on Sunday from startOfWeek', () => {
+       expect( calendar.startOfWeek( new Date(2018, 7, 25) ).getDay() ).toEqual(0);
     });
     
-    it('should set the specific date on Saturday', () => {
-        expect( calendar.endOfWeek(new Date(2018, 7, 24)).getDay() ).toEqual(6);
+    it('should set the specific date on Saturday from endOfWeek', () => {
+        expect( calendar.endOfWeek( new Date(2018, 7, 24) ).getDay() ).toEqual(6);
     });
     
+    it('should move the renderDate to the next date from nextDate', () => {
+        calendar.nextDate();
+        expect(calendar.renderDate.getDate()).toEqual(20);
+    });
+    
+    it('should identify a date as invalid', () => {
+       calendar.isInvalid(new Date(2018, 7, 19)).toEqual(true);
+       calendar.isInvalid(new Date(2018, 7, 25)).toEqual(false);
+       calendar.isInvalid(new Date(2018, 8, 24)).toEqual(true);
+    });
     
 });

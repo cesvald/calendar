@@ -2,7 +2,6 @@ export class Calendar {
     startDate: Date;
     numDays: number;
     countryCode: string;
-    startOfWeek: Date;
     renderDate: Date;
     
     constructor(startDate: Date, numDays: number, countryCode: string) {
@@ -23,6 +22,4 @@ export class Calendar {
         resultDate.setDate(date.getDate() + (7 + 6 - date.getDay()) % 7);
         return resultDate;
     }
-    
-    
 }
