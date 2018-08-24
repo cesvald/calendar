@@ -1,6 +1,6 @@
 import {Calendar} from './calendar'
 
-fdescribe('Calendar Class', () => {
+describe('Calendar Class', () => {
     let calendar: Calendar;
     
     beforeEach(() => {
@@ -11,36 +11,40 @@ fdescribe('Calendar Class', () => {
         calendar = null;
     });
     
-    it('should set the initial render date on the closest Sunday: 19 of August', () => {
-       expect(calendar.renderDate.getDay()).toEqual(0);
+    it('should set the end date to the closest Saturday after moving the numDays', () => {
+        expect(calendar.endDate.getDate()).toEqual(22);
+        expect(calendar.endDate.getMonth()).toEqual(8);
     });
     
-    it('should set the end date to the closest Saturday after moving the numDays', () => {
-        expect(calendar.endDate().getDate()).toEqual(22);
-        expect(calendar.endDate().getMonth()).toEqual(8);
+    it('should have two months', () => {
+        expect(calendar.months.length).toEqual(2);
     });
     
     it('should set the specific date on Sunday from startOfWeek', () => {
-       expect( calendar.startOfWeek( new Date(2018, 7, 25) ).getDay() ).toEqual(0);
+       expect( calendar.startOfWeek( new Date(2018, 7, 23) ).getDay() ).toEqual(0);
+       expect( calendar.startOfWeek( new Date(2018, 7, 23) ).getDate() ).toEqual(19);
     });
     
     it('should set the specific date on Saturday from endOfWeek', () => {
         expect( calendar.endOfWeek( new Date(2018, 7, 24) ).getDay() ).toEqual(6);
     });
     
-    it('should move the renderDate to the next date from nextDate', () => {
-        calendar.nextDate();
-        expect(calendar.renderDate.getDate()).toEqual(20);
+    it('should return array of dates from datesStartOfWeek', () => {
+        expect( calendar.datesStartOfWeek( new Date(2018, 7, 24) ).length ).toEqual(5);
+    });
+    
+    it('should return array of dates from datesEndOfWeek', () => {
+        expect( calendar.datesEndOfWeek( new Date(2018, 7, 24) ).length ).toEqual(1);
     });
     
     it('should identify a date as invalid', () => {
-       calendar.isInvalid(new Date(2018, 7, 19)).toEqual(true);
-       calendar.isInvalid(new Date(2018, 7, 25)).toEqual(false);
-       calendar.isInvalid(new Date(2018, 8, 24)).toEqual(true);
+       expect(calendar.isInvalid(new Date(2018, 7, 19))).toBeTruthy();
+       expect(calendar.isInvalid(new Date(2018, 7, 25))).toBeFalsy();
+       expect(calendar.isInvalid(new Date(2018, 8, 24))).toBeTruthy();
     });
     
     it('should identify a date as weekday', () => {
-        calendar.isWeekday(new Date(2018, 7, 23)).toEqual(true);
-        calendar.isWeekday(new Date(2018, 7, 25)).toEqual(false);
+        expect(calendar.isWeekday(new Date(2018, 7, 23))).toBeTruthy();
+        expect(calendar.isWeekday(new Date(2018, 7, 25))).toBeFalsy();
     });
-});
+}); 
