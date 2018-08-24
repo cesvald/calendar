@@ -3,12 +3,15 @@ export class Calendar {
     numDays: number;
     countryCode: string;
     renderDate: Date;
+    endDate: Date;
     
     constructor(startDate: Date, numDays: number, countryCode: string) {
         this.startDate = startDate;
         this.numDays = numDays;
         this.countryCode = countryCode;
         this.renderDate = this.startOfWeek(this.startDate);
+        this.endDate = new Date(this.startDate.getTime());
+        this.endDate.setDate(this.endDate.getDate() + numDays);
     }
     
     startOfWeek(date) {
