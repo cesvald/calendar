@@ -16,10 +16,6 @@ describe('Calendar Class', () => {
         expect(calendar.endDate.getMonth()).toEqual(8);
     });
     
-    it('should have two months', () => {
-        expect(calendar.months.length).toEqual(2);
-    });
-    
     it('should set the specific date on Sunday from startOfWeek', () => {
        expect( calendar.startOfWeek( new Date(2018, 7, 23) ).getDay() ).toEqual(0);
        expect( calendar.startOfWeek( new Date(2018, 7, 23) ).getDate() ).toEqual(19);
@@ -35,6 +31,20 @@ describe('Calendar Class', () => {
     
     it('should return array of dates from datesEndOfWeek', () => {
         expect( calendar.datesEndOfWeek( new Date(2018, 7, 24) ).length ).toEqual(1);
+    });
+    
+    it('should have two months', () => {
+        expect(calendar.months.length).toEqual(2);
+    });
+    
+    it('should have 2 weeks the first month and 3 weeks tehe second month with 7 days each one', () => {
+        expect(calendar.months[0].weeks.length).toEqual(2);
+        expect(calendar.months[0].weeks[0].length).toEqual(7);
+        expect(calendar.months[0].weeks[1].length).toEqual(7);
+        expect(calendar.months[1].weeks.length).toEqual(3);
+        expect(calendar.months[1].weeks[0].length).toEqual(7);
+        expect(calendar.months[1].weeks[1].length).toEqual(7);
+        expect(calendar.months[1].weeks[2].length).toEqual(7);
     });
     
     it('should identify a date as invalid', () => {

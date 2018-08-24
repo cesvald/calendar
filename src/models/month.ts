@@ -1,3 +1,3 @@
 export class Month {
-    dates: Date[] = [];
+    weeks: Date[][] = [];
 }

@@ -16,16 +16,31 @@ export class Calendar {
         this.endDate.setDate(this.endDate.getDate() + numDays);
         this.endDate = this.endOfWeek(this.endDate);
         this.months = [];
+        
         let month = new Month(); 
-        let renderDate = this.startOfWeek(this.startDate);
-        let prevDate = null;
+        let renderDate: Date = this.startOfWeek(this.startDate);
+        let prevDate: Date = null;
+        let week: Date[] = []
         while(renderDate <= this.endDate){
             let currentDate = new Date(renderDate.getTime());
             if(prevDate != null && currentDate.getMonth() != prevDate.getMonth()){
+                let postWeekDates = this.datesEndOfWeek(prevDate);
+                week = week.concat(postWeekDates);
+                month.weeks.push(week);
                 this.months.push(month);
+                
                 month = new Month();
+                week = [];
+                let prevWeekDates = this.datesStartOfWeek(currentDate);
+                week = week.concat(prevWeekDates);
+                
+                prevDate = null;
             }
-            month.dates.push(currentDate);
+            if(prevDate != null && currentDate.getDay() == 0){
+                month.weeks.push(week);
+                week = [];
+            }
+            week.push(currentDate);
             prevDate = new Date(renderDate.getTime());
             renderDate.setDate(renderDate.getDate() + 1);
         }

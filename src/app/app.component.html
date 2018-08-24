@@ -12,3 +12,6 @@
 <label for="startDate">Country Code</label>
 <input type="text" name="countryCode" id="country-code" ([ngModel])="calendar.countryCode"/>
 
+<div class="month-wrapper" *ngFor="let month of calendar.months">
+  <h4 class="month-title">{{month.weeks[0][0] | date:'MMMM yyyy'}}</h4>
+</div>
