@@ -19,20 +19,23 @@ export class Calendar {
         this.startDate = new Date(this.startDate);
         this.endDate = new Date(this.startDate.getTime());
         this.endDate.setDate(this.endDate.getDate() + this.numDays);
+        console.log(this.endDate)
         this.months = [];
         let month = new Month(); 
+        month.startDate = new Date(this.startDate.getTime());
         let renderDate: Date = this.startOfWeek(this.startDate);
         let prevDate: Date = null;
         let week: Date[] = []
         while(renderDate < this.endDate){
             let currentDate = new Date(renderDate.getTime());
-            if(prevDate != null && currentDate.getMonth() != prevDate.getMonth()){
+            if(prevDate != null && currentDate.getMonth() != prevDate.getMonth()) {
                 let postWeekDates = this.datesEndOfWeek(prevDate);
                 week = week.concat(postWeekDates);
                 month.weeks.push(week);
                 this.months.push(month);
                 
                 month = new Month();
+                month.startDate = new Date(currentDate.getTime());
                 week = [];
                 let prevWeekDates = this.datesStartOfWeek(currentDate);
                 week = week.concat(prevWeekDates);
@@ -52,8 +55,6 @@ export class Calendar {
         week = week.concat(remindingDates);
         month.weeks.push(week);
         this.months.push(month);
-        
-        console.log(this.endDate)
         console.log(this.months)
     }
     

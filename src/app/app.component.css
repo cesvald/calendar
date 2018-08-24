@@ -37,6 +37,7 @@ td {
     border-left: none;
     border-bottom: none;
     padding: 5px;
+    width: 16px;
 }
 
 .invalid {

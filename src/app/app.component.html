@@ -13,7 +13,7 @@
   
 <div class="container">
   <div class="month-wrapper" *ngFor="let month of calendar.months">
-    <h4 class="month-title">{{month.weeks[0][6] | date:'MMMM yyyy'}}</h4>
+    <h4 class="month-title">{{month.startDate | date:'MMMM yyyy'}}</h4>
     <table cellspacing="0" cellpadding="0">
       <thead>
         <tr>
@@ -22,7 +22,7 @@
       </thead>
       <tbody>
         <tr class="week-row" *ngFor="let week of month.weeks">
-          <td class="day" [class.invalid]="calendar.isInvalid(day, month.weeks[0][6])" [class.weekday]="calendar.isWeekday(day, month.weeks[0][6])" [class.weekend]="calendar.isWeekend(day, month.weeks[0][6])" *ngFor="let day of week" ><span>{{day.getDate()}}</span></td>
+          <td class="day" [class.invalid]="calendar.isInvalid(day, month.startDate)" [class.weekday]="calendar.isWeekday(day, month.startDate)" [class.weekend]="calendar.isWeekend(day, month.startDate)" *ngFor="let day of week" ><span>{{day.getDate()}}</span></td>
         </tr>
       </tbody>
     </table>
