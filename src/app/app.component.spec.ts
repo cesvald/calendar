@@ -68,4 +68,27 @@ describe('AppComponent', () => {
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('h4').textContent).toContain('August 2018');
   }));
+  
+  it('should have all months rendered', async(() => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+    const app = fixture.debugElement.componentInstance;
+    let months = compiled.querySelectorAll('.month-wrapper');
+    expect(months.length).toEqual(app.calendar.months.length);
+  }));
+  
+  fit('should have all days rendered', async(() => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+    const app = fixture.debugElement.componentInstance;
+    let totalDays = 0;
+    for(let month of app.calendar.months){
+      totalDays += month.weeks.length * 7;
+    }
+    let days = compiled.querySelectorAll('.day');
+    
+    expect(totalDays).toEqual(days.length);
+  }));
 });
