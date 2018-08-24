@@ -3,14 +3,19 @@ export class Calendar {
     numDays: number;
     countryCode: string;
     startOfWeek: Date;
-    renderDay: Date;
+    renderDate: Date;
     
     constructor(startDate: Date, numDays: number, countryCode: string) {
         this.startDate = startDate;
         this.numDays = numDays;
         this.countryCode = countryCode;
-        this.startOfWeek = this.startDate
-        this.startOfWeek.setDate(this.startOfWeek.getDate() - this.startOfWeek.getDay());
+        this.renderDate = this.startOfWeek(this.startDate);
+    }
+    
+    startOfWeek(date) {
+        let resultDate = new Date(date.getTime());
+        resultDate.setDate(date.getDate() - date.getDay());
+        return resultDate;
     }
     
     endOfWeek(date) {
