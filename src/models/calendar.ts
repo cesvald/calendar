@@ -12,4 +12,12 @@ export class Calendar {
         this.startOfWeek = this.startDate
         this.startOfWeek.setDate(this.startOfWeek.getDate() - this.startOfWeek.getDay());
     }
+    
+    endOfWeek(date) {
+        let resultDate = new Date(date.getTime());
+        resultDate.setDate(date.getDate() + (7 + 6 - date.getDay()) % 7);
+        return resultDate;
+    }
+    
+    
 }
